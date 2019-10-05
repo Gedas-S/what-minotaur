@@ -1,20 +1,22 @@
-extends Camera
+extends KinematicBody
 
-export var speed = 2
+export var speed = 100
 export var sensitivity = 1
 var velocity = Vector3(0,0,0)
 var esc_capture = false
 var rotating = true
 var mouse_ratio = 0
+var camera = Camera
 
 func _ready():
-	self.make_current()
+	self.camera = self.get_node("PlayerEyes")
+	self.camera.make_current()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.recalculate_ratios()
+	self.translate(Vector3(0,0,10))
 
 func _process(delta):
-	self.translate(velocity*speed*delta)
-	self.translation.y = 0
+	self.move_and_slide((self.transform.xform(velocity.normalized())-self.transform.origin)*speed*delta)
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -33,7 +35,7 @@ func _unhandled_input(event):
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if rotating else Input.MOUSE_MODE_VISIBLE)
 	elif event is InputEventMouseMotion and rotating:
 		self.rotate(Vector3(0,1,0), event.relative.x * mouse_ratio)
-		self.rotate(self.transform.xform(Vector3(1,0,0)) - self.transform.origin, event.relative.y * mouse_ratio)
+		self.camera.rotate(self.camera.transform.xform(Vector3(1,0,0)) - self.camera.transform.origin, event.relative.y * mouse_ratio)
 
 func recalculate_ratios():
-	mouse_ratio = -deg2rad(self.fov) * sensitivity / get_viewport().size[0]
+	mouse_ratio = -deg2rad(self.camera.fov) * sensitivity / get_viewport().size[0]
