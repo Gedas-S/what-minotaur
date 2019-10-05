@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://walls/WallSegment.tscn" type="PackedScene" id=2]
@@ -10,6 +10,13 @@ height = 0.8
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.337255, 0.278431, 0.278431, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 4 )
+size = Vector3( 100, 2, 100 )
 
 [node name="Maze" type="Spatial"]
 
@@ -29,14 +36,19 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 2 )
 
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
 [node name="WallSegment" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )
 
 [node name="WallSegment2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )
 
 [node name="WallSegment3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )

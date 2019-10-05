@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var speed = 100
+export var speed = 150
 export var sensitivity = 1
 var velocity = Vector3(0,0,0)
 var esc_capture = false
