@@ -30,7 +30,7 @@ func _ready():
 
 func _process(delta):
 	self.translate(velocity*speed*delta)
-	self.translation.y = 0
+#	self.translation.y = 0
 
 func _unhandled_input(event):
 	if event is InputEventKey:

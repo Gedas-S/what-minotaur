@@ -17,10 +17,20 @@ func _ready():
 func grid(width=10, height=10):
 	var offsetX = width / 2
 	var offsetZ = height / 2
+	var scaleX = 10
+	var scaleY = 10
 	
 	for i in range(width):
 		for j in range(height):
-			var q = WallSegment.instance()
-			q.translate(Vector3((i - offsetX)*1, 0, (j - offsetZ)*1))
 			
-			print(q.translation)
+			var position = Vector3((i - offsetX)*scaleX, 0, (j - offsetZ)*scaleY)
+			
+			var q = WallSegment.instance()
+			q.translate(position)
+			
+			var qq = WallSegment.instance()
+			qq.translate(position)
+			qq.rotate(Vector3(0, 1, 0), deg2rad(90))
+			
+			add_child(q)
+			add_child(qq)
