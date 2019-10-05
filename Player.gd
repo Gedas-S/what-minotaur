@@ -28,6 +28,8 @@ func _unhandled_input(event):
 			velocity.x = int(event.pressed) * 1
 		elif event.scancode == KEY_A:
 			velocity.x = int(event.pressed) * -1
+		elif event.scancode == KEY_E:
+			self.get_parent().get_node("WallSegment2").shatter()
 		elif event.scancode == KEY_ESCAPE and event.pressed != esc_capture:
 			esc_capture = event.pressed
 			if event.pressed:
