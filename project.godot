@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Test project"
+config/name="Not a test project, it is for reals"
 run/main_scene="res://Maze.tscn"
 config/icon="res://icon.png"
 
