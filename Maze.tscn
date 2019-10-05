@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://walls/WallSegment.tscn" type="PackedScene" id=2]
@@ -7,6 +7,17 @@
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.498801
 height = 0.8
+
+[sub_resource type="SpatialMaterial" id=5]
+params_diffuse_mode = 4
+albedo_color = Color( 0.215686, 0.0235294, 0.00784314, 1 )
+metallic = 1.0
+metallic_specular = 0.52
+
+[sub_resource type="CylinderShape" id=6]
+margin = 0.02
+radius = 0.12
+height = 0.3
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 50, 1, 50 )
@@ -29,6 +40,28 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0 )
 [node name="PlayerCollider" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.9, 0 )
 shape = SubResource( 1 )
+
+[node name="Hammer" type="Spatial" parent="Player"]
+
+[node name="Handle" type="CSGCylinder" parent="Player/Hammer"]
+transform = Transform( 0.625391, 0.780312, 0, -0.780312, 0.625391, 0, 0, 0, 1, -0.120729, 0.897496, -0.259967 )
+radius = 0.025
+height = 1.2
+sides = 13
+material = SubResource( 5 )
+
+[node name="Head" type="CSGCylinder" parent="Player/Hammer/Handle"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.6, 0 )
+radius = 0.12
+height = 0.3
+sides = 26
+smooth_faces = false
+material = SubResource( 5 )
+
+[node name="KinematicBody" type="KinematicBody" parent="Player/Hammer/Handle/Head"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/Hammer/Handle/Head/KinematicBody"]
+shape = SubResource( 6 )
 
 [node name="Floor" type="StaticBody" parent="."]
 
