@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ImmediateGeometry.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -11,6 +11,9 @@ height = 0.8
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 1, 0.183234 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 50, 1, 50 )
 
 [node name="Maze" type="Spatial"]
 
@@ -37,3 +40,9 @@ shape = SubResource( 3 )
 
 [node name="CSGBox" type="CSGBox" parent="StaticBody"]
 depth = 0.306
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+shape = SubResource( 4 )
