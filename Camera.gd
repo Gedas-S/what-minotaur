@@ -16,7 +16,7 @@ extends Camera
 #func _process(delta):
 #	pass
 
-export var speed = 2
+export var speed = 6
 export var sensitivity = 1
 var velocity = Vector3(0,0,0)
 var esc_capture = false
@@ -25,6 +25,7 @@ var mouse_ratio = 0
 
 func _ready():
 	self.make_current()
+	self.translate(Vector3(0, 30, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.recalculate_ratios()
 
