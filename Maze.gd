@@ -14,7 +14,7 @@ func _ready():
 	var mazeWidth = 30
 	var mazeHeight = 30
 	var maze = mg.prim(mazeWidth,mazeHeight)
-	var wallSize = 3
+	var wallSize = 2.8
 	var mazeWalls = makeMaze(maze.underlying, wallSize, centerMaze(mazeWidth, mazeHeight, wallSize))
 	for idx in range(mazeWalls.size()):
 		add_child(mazeWalls[idx])
@@ -25,7 +25,7 @@ func _ready():
 func centerMaze(w: int, h: int, wallSize: float):
 	return (Vector3(w*wallSize, 0, 0) + Vector3(0, 0, h*wallSize)) / -2.0
 
-func makeMaze(grid: Array, wallSize: int, offset: Vector3):
+func makeMaze(grid: Array, wallSize: float, offset: Vector3):
 	var stepSize = wallSize / 2.0
 	var walls = []
 	for x in range(grid.size()):
