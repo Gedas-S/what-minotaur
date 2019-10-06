@@ -9,7 +9,7 @@ func shatter():
 		return
 	shattered = true
 	remove_child(get_node("MeshInstance"))
-	remove_child(get_node("StaticBody"))
+	remove_child(get_node("WallStaticBody"))
 	broken = BreakableWall.instance()
 	add_child(broken)
 	var timer = Timer.new()

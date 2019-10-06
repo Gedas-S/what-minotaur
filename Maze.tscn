@@ -50,7 +50,7 @@ metallic = 1.0
 metallic_specular = 0.52
 
 [sub_resource type="CylinderShape" id=4]
-margin = 0.02
+margin = 0.3
 radius = 0.12
 height = 0.3
 
@@ -97,8 +97,8 @@ smooth_faces = false
 material = SubResource( 3 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Player/Hammer/Handle/Head"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Player/Hammer/Handle/Head/KinematicBody"]
 shape = SubResource( 4 )
