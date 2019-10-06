@@ -10,9 +10,6 @@ export (PackedScene) var WallSegment
 func _ready():
 	var mg = load("res://maze_generator.gd").new()
 	var maze = mg.prim(10,10)
-	for x in range(maze.maxWidth):
-		print(maze.underlying[x])
-			
 	
 	makeMaze(maze.underlying, 10)
 
