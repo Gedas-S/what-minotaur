@@ -12,6 +12,7 @@ var hammer : AnimationPlayer
 var hammer_hitter : KinematicBody
 var hammer_has_hit : bool = true
 var hammer_hitter_last_pos : Vector3
+var running : bool = false
 
 func _ready():
 	self.camera = self.get_node("PlayerEyes")
@@ -26,11 +27,15 @@ func _ready():
 func _process(delta):
 	# warning-ignore:return_value_discarded
 	var vel = self.transform.xform(velocity.normalized())-self.transform.origin
-	vel.x *= speed*delta
-	vel.z *= speed*delta
+	var multiplier = speed*delta
+	if running:
+		multiplier *= 2
+	vel.x *= multiplier
+	vel.z *= multiplier
 	if vel.y == 1:
 		vel.y = speed / 10
 	vel.y += gravity * delta
+	
 	self.move_and_slide(vel, Vector3(0,1,0))
 	if (self.hammer.current_animation_position < 1.1 or not self.hammer_has_hit) and self.hammer.current_animation_position > 0.95:
 		self.hammer_has_hit = true
@@ -51,6 +56,8 @@ func _unhandled_input(event):
 			velocity.x = int(event.pressed) * -1
 		elif event.scancode == KEY_SPACE:
 			velocity.y = int(event.pressed && is_on_floor()) * 1
+		elif event.scancode == KEY_SHIFT:
+			running = event.pressed
 		elif event.scancode == KEY_ESCAPE and event.pressed != esc_capture:
 			esc_capture = event.pressed
 			if event.pressed:
