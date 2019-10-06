@@ -14,6 +14,6 @@ func shatter():
 	add_child(broken)
 	var timer = Timer.new()
 	timer.connect("timeout",self,"queue_free")
-	timer.set_wait_time(60)
+	timer.set_wait_time(15)
 	add_child(timer)
 	timer.start()
