@@ -2,7 +2,7 @@ extends KinematicBody
 
 export var speed : float = 150
 export var sensitivity : float = 1
-export var gravity : float = -30
+export var gravity : float = -150
 var velocity : Vector3 = Vector3(0,0,0)
 var esc_capture : bool = false
 var rotating : bool = true
@@ -32,8 +32,8 @@ func _process(delta):
 		multiplier *= 2
 	vel.x *= multiplier
 	vel.z *= multiplier
-	if vel.y == 1:
-		vel.y = speed / 10
+	if vel.y > 0.5 && vel.y <= 1:
+		vel.y = speed / 20
 	vel.y += gravity * delta
 	
 	self.move_and_slide(vel, Vector3(0,1,0))
