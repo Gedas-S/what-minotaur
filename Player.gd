@@ -2,6 +2,7 @@ extends KinematicBody
 
 export var speed : float = 150
 export var sensitivity : float = 1
+export var gravity : float = -30
 var velocity : Vector3 = Vector3(0,0,0)
 var esc_capture : bool = false
 var rotating : bool = true
@@ -24,7 +25,13 @@ func _ready():
 
 func _process(delta):
 	# warning-ignore:return_value_discarded
-	self.move_and_slide((self.transform.xform(velocity.normalized())-self.transform.origin)*speed*delta)
+	var vel = self.transform.xform(velocity.normalized())-self.transform.origin
+	vel.x *= speed*delta
+	vel.z *= speed*delta
+	if vel.y == 1:
+		vel.y = speed / 10
+	vel.y += gravity * delta
+	self.move_and_slide(vel, Vector3(0,1,0))
 	if (self.hammer.current_animation_position < 1.1 or not self.hammer_has_hit) and self.hammer.current_animation_position > 0.95:
 		self.hammer_has_hit = true
 		var collisions = self.hammer_hitter.move_and_collide(self.hammer_hitter.transform.origin - self.hammer_hitter_last_pos, true, true, true)
@@ -42,6 +49,8 @@ func _unhandled_input(event):
 			velocity.x = int(event.pressed) * 1
 		elif event.scancode == KEY_A:
 			velocity.x = int(event.pressed) * -1
+		elif event.scancode == KEY_SPACE:
+			velocity.y = int(event.pressed && is_on_floor()) * 1
 		elif event.scancode == KEY_ESCAPE and event.pressed != esc_capture:
 			esc_capture = event.pressed
 			if event.pressed:
