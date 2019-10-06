@@ -12,14 +12,14 @@ height = 0.8
 resource_name = "SwingHammer"
 length = 1.7
 tracks/0/type = "transform"
-tracks/0/path = NodePath("AnimationPlayer/Handle")
+tracks/0/path = NodePath("Handle")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = PoolRealArray(  )
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Handle:translation")
+tracks/1/path = NodePath("Handle:translation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -31,7 +31,7 @@ tracks/1/keys = {
 "values": [ Vector3( -0.120729, 0.897496, -0.259967 ), Vector3( 0.0688182, 1.46199, -0.21266 ), Vector3( 0.0688182, 0.992271, -0.595573 ), Vector3( -0.120729, 0.897496, -0.259967 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AnimationPlayer/Handle:rotation_degrees")
+tracks/2/path = NodePath("Handle:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -81,14 +81,14 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Hammer"]
 anims/SwingHammer = SubResource( 2 )
 
-[node name="Handle" type="CSGCylinder" parent="Player/Hammer/AnimationPlayer"]
+[node name="Handle" type="CSGCylinder" parent="Player/Hammer"]
 transform = Transform( 0.625391, 0.780312, 0, -0.780312, 0.625391, 0, 0, 0, 1, -0.120729, 0.897496, -0.259967 )
 radius = 0.025
 height = 1.2
 sides = 13
 material = SubResource( 3 )
 
-[node name="Head" type="CSGCylinder" parent="Player/Hammer/AnimationPlayer/Handle"]
+[node name="Head" type="CSGCylinder" parent="Player/Hammer/Handle"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.6, 0 )
 radius = 0.12
 height = 0.3
@@ -96,9 +96,11 @@ sides = 26
 smooth_faces = false
 material = SubResource( 3 )
 
-[node name="KinematicBody" type="KinematicBody" parent="Player/Hammer/AnimationPlayer/Handle/Head"]
+[node name="KinematicBody" type="KinematicBody" parent="Player/Hammer/Handle/Head"]
+collision_layer = 0
+collision_mask = 0
 
-[node name="CollisionShape" type="CollisionShape" parent="Player/Hammer/AnimationPlayer/Handle/Head/KinematicBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Player/Hammer/Handle/Head/KinematicBody"]
 shape = SubResource( 4 )
 
 [node name="Floor" type="StaticBody" parent="."]
