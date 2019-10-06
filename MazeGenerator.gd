@@ -8,7 +8,12 @@ export (PackedScene) var WallSegment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	var mg = load("res://maze_generator.gd").new()
+	var mg = load("res://maze_generator.gd").new()
+	var maze = mg.prim(3,3)
+	for x in range(maze.maxWidth):
+		print(maze.underlying[x])
+			
+	
 	grid(4, 4)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
