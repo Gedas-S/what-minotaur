@@ -11,7 +11,7 @@ func _ready():
 	var mg = load("res://maze_generator.gd").new()
 	var maze = mg.prim(10,10)
 	
-	makeMaze(maze.underlying, 10)
+	makeMaze(maze.underlying, 3)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -19,7 +19,7 @@ func _ready():
 
 # takes the underlying array[array] of PrimsGrid
 func makeMaze(grid: Array, wallSize: int):
-	var stepSize = wallSize / 2
+	var stepSize = wallSize / 2.0
 	for x in range(grid.size()):
 		var xOdd = x % 2 == 1
 		for y in range(grid[x].size()):
