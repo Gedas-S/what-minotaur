@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Maze.gd" type="Script" id=1]
 [ext_resource path="res://walls/WallSegment.tscn" type="PackedScene" id=2]
 [ext_resource path="res://walls/BreakableWall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player.gd" type="Script" id=4]
+[ext_resource path="res://mobs/Worm.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.498801
@@ -117,3 +118,6 @@ shape = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 mesh = SubResource( 7 )
 material/0 = null
+
+[node name="Worm" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59957, 2.4033, 0 )
