@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Maze.gd" type="Script" id=1]
 [ext_resource path="res://walls/WallSegment.tscn" type="PackedScene" id=2]
 [ext_resource path="res://walls/BreakableWall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.498801
@@ -65,15 +66,18 @@ material = SubResource( 6 )
 size = Vector3( 100, 2, 100 )
 
 [node name="Maze" type="Spatial"]
+script = ExtResource( 1 )
+WallSegment = ExtResource( 2 )
+BreakableWall = ExtResource( 3 )
 
 [node name="Player" type="KinematicBody" parent="."]
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="PlayerEyes" type="Camera" parent="Player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0 )
 
 [node name="PlayerCollider" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.9, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
 [node name="Hammer" type="Spatial" parent="Player"]
@@ -82,14 +86,14 @@ shape = SubResource( 1 )
 anims/SwingHammer = SubResource( 2 )
 
 [node name="Handle" type="CSGCylinder" parent="Player/Hammer"]
-transform = Transform( 0.625391, 0.780312, 0, -0.780312, 0.625391, 0, 0, 0, 1, -0.120729, 0.897496, -0.259967 )
+transform = Transform( 0.640846, 0.767668, -0.00164074, -0.767639, 0.640799, -0.0103978, -0.00693069, 0.0079229, 0.999945, -0.120729, 0.897496, -0.259967 )
 radius = 0.025
 height = 1.2
 sides = 13
 material = SubResource( 3 )
 
 [node name="Head" type="CSGCylinder" parent="Player/Hammer/Handle"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.6, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.6, 0 )
 radius = 0.12
 height = 0.3
 sides = 26
@@ -113,15 +117,3 @@ shape = SubResource( 5 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 mesh = SubResource( 7 )
 material/0 = null
-
-[node name="WallSegment" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.00368 )
-BreakableWall = ExtResource( 3 )
-
-[node name="WallSegment2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.00368 )
-BreakableWall = ExtResource( 3 )
-
-[node name="WallSegment3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.00368 )
-BreakableWall = ExtResource( 3 )
