@@ -23,7 +23,7 @@ func _ready():
 #	pass
 
 func centerMaze(w: int, h: int, wallSize: float):
-	return (Vector3(w*wallSize, 0, 0) + Vector3(0, 0, h*wallSize)) / -2
+	return (Vector3(w*wallSize, 0, 0) + Vector3(0, 0, h*wallSize)) / -2.0
 
 func makeMaze(grid: Array, wallSize: int, offset: Vector3):
 	var stepSize = wallSize / 2.0
