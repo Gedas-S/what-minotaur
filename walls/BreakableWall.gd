@@ -5,7 +5,7 @@ export (PackedScene) var Rubble
 var height = 3
 var width = 3
 var thickness = 0.2
-var rubble = 0.1
+var rubble = 0.2
 
 func _ready():
 	var origin = Vector3(-(width - rubble)/2, rubble/2, -(thickness - rubble)/2)

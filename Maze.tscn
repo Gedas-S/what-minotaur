@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://walls/WallSegment.tscn" type="PackedScene" id=2]
@@ -8,8 +8,61 @@
 radius = 0.498801
 height = 0.8
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="Animation" id=2]
+resource_name = "SwingHammer"
+length = 1.7
+tracks/0/type = "transform"
+tracks/0/path = NodePath("Handle")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath("Handle:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.1, 1.7 ),
+"transitions": PoolRealArray( 0.707107, 1.8025, 3.24901, 1.46409 ),
+"update": 0,
+"values": [ Vector3( -0.120729, 0.897496, -0.259967 ), Vector3( 0.0688182, 1.46199, -0.21266 ), Vector3( 0.0688182, 0.992271, -0.595573 ), Vector3( -0.120729, 0.897496, -0.259967 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Handle:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.0129642, 0.8, 1.1, 1.7 ),
+"transitions": PoolRealArray( 0.90125, 1.27456, 2.07053, 1.8025 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -51.2891 ), Vector3( 13.2634, -2.093, -25.8406 ), Vector3( -74.6796, -7.73195, -17.8998 ), Vector3( 0, 0, -51.2891 ) ]
+}
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 4
+albedo_color = Color( 0.215686, 0.0235294, 0.00784314, 1 )
+metallic = 1.0
+metallic_specular = 0.52
+
+[sub_resource type="CylinderShape" id=4]
+margin = 0.3
+radius = 0.12
+height = 0.3
+
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 50, 1, 50 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.337255, 0.278431, 0.278431, 1 )
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+size = Vector3( 100, 2, 100 )
 
 [node name="Maze" type="Spatial"]
 
@@ -23,20 +76,52 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.9, 0 )
 shape = SubResource( 1 )
 
+[node name="Hammer" type="Spatial" parent="Player"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Hammer"]
+anims/SwingHammer = SubResource( 2 )
+
+[node name="Handle" type="CSGCylinder" parent="Player/Hammer"]
+transform = Transform( 0.625391, 0.780312, 0, -0.780312, 0.625391, 0, 0, 0, 1, -0.120729, 0.897496, -0.259967 )
+radius = 0.025
+height = 1.2
+sides = 13
+material = SubResource( 3 )
+
+[node name="Head" type="CSGCylinder" parent="Player/Hammer/Handle"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0.6, 0 )
+radius = 0.12
+height = 0.3
+sides = 26
+smooth_faces = false
+material = SubResource( 3 )
+
+[node name="KinematicBody" type="KinematicBody" parent="Player/Hammer/Handle/Head"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Player/Hammer/Handle/Head/KinematicBody"]
+shape = SubResource( 4 )
+
 [node name="Floor" type="StaticBody" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+mesh = SubResource( 7 )
+material/0 = null
 
 [node name="WallSegment" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )
 
 [node name="WallSegment2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )
 
 [node name="WallSegment3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3.00368 )
 BreakableWall = ExtResource( 3 )
