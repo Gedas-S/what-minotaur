@@ -67,6 +67,7 @@ material = SubResource( 6 )
 size = Vector3( 100, 2, 100 )
 
 [node name="Maze" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0491059, 0, -0.0312815 )
 script = ExtResource( 1 )
 WallSegment = ExtResource( 2 )
 BreakableWall = ExtResource( 3 )
@@ -120,4 +121,4 @@ mesh = SubResource( 7 )
 material/0 = null
 
 [node name="Worm" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59957, 2.4033, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.59957, 0.160631, 0 )
