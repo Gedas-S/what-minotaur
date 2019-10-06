@@ -47,7 +47,7 @@ func _unhandled_input(event):
 			if event.pressed:
 				rotating = not rotating
 				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if rotating else Input.MOUSE_MODE_VISIBLE)
-	elif event is InputEventMouseButton and event.button_index == 1:
+	elif event is InputEventMouseButton and rotating and event.button_index == 1:
 		self.hammer.play("SwingHammer")
 		self.hammer_has_hit = false
 	elif event is InputEventMouseMotion and rotating:
