@@ -14,7 +14,7 @@ func _ready():
 	var mazeWidth = 30
 	var mazeHeight = 30
 	var maze = mg.prim(mazeWidth,mazeHeight)
-	var wallSize = 2.8
+	var wallSize = 2.82
 	var mazeWalls = makeMaze(maze.underlying, wallSize, centerMaze(mazeWidth, mazeHeight, wallSize))
 	for idx in range(mazeWalls.size()):
 		add_child(mazeWalls[idx])
